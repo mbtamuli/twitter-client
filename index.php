@@ -1,5 +1,7 @@
 <?php
+  require_once ('twitteroauth/autoload.php');
   require_once ('constants.php');
+  session_start();
   use Abraham\TwitterOAuth\TwitterOAuth;
 
   if (!empty($_SESSION['access_token']) && isset($_SESSION['access_token'])) {

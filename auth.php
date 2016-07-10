@@ -1,5 +1,7 @@
 <?php
+require_once ('twitteroauth/autoload.php');
 require_once ('constants.php');
+session_start();
 use Abraham\TwitterOAuth\TwitterOAuth;
   
 $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET);

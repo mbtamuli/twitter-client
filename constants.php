@@ -1,6 +1,4 @@
 <?php
-require_once ('twitteroauth/autoload.php');
-session_start();
 
 define('CONSUMER_KEY', "YOUR_CONSUMER_KEY");
 define('CONSUMER_SECRET', "YOUR_CONSUMER_SECRET");
