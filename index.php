@@ -43,7 +43,12 @@
           <ul class="bjqs">
             <?php
               if (!empty($access_token) && isset($access_token)) {
-                $statuses = $connection->get("statuses/home_timeline", ["count" => 10, "exclude_replies" => true]);
+                if (!empty($_SESSION['statuses']) && isset($_SESSION['statuses'])) {
+                  $statuses = $_SESSION['statuses'];
+                }
+                else {
+                  $statuses = $connection->get("statuses/home_timeline", ["count" => 10, "exclude_replies" => true]);
+                }
                 foreach ($statuses as $status) {
             ?>
               <li>
@@ -61,7 +66,20 @@
             ?>            
           </ul>
         </div>
+        <?php
+          if (!empty($access_token) && isset($access_token) && isset($connection)) {
+            $followers_ids = $connection->get("followers/ids", ["count" => 10]);
+            $comma_separated = implode(",", $followers_ids->ids);
+            $users = $connection->get("users/lookup", ["user_id" => $comma_separated]);
 
+            foreach ($users as $user) {
+                echo "<a href='follower.php?screen_name=" . $user->screen_name . "'>" . $user->name . "</a><br>";
+            }
+          }
+          else {
+              echo "Please Sign In again";
+          }          
+        ?>
       </div>
     </div>
     <script src="js/jquery-latest.min.js"></script>
